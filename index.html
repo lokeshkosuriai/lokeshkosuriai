@@ -318,7 +318,175 @@
             line-height: 1.8;
         }
 
-        /* Skills Section */
+        /* Awards Section */
+        .awards {
+            padding: 100px 0;
+            background: rgba(26, 26, 46, 0.3);
+        }
+
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .award-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .award-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #ffd700, #ffb700);
+        }
+
+        .award-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2);
+        }
+
+        .award-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .award-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        .award-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .award-year {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Patents Section */
+        .patents {
+            padding: 100px 0;
+            background: rgba(22, 33, 62, 0.3);
+        }
+
+        .patents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .patent-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .patent-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #64ffda, #00bcd4);
+        }
+
+        .patent-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(100, 255, 218, 0.4);
+            box-shadow: 0 15px 40px rgba(100, 255, 218, 0.2);
+        }
+
+        .patent-status {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .patent-status.granted {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .patent-status.pending {
+            background: rgba(251, 146, 60, 0.2);
+            color: #fb923c;
+            border: 1px solid rgba(251, 146, 60, 0.3);
+        }
+
+        .patent-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            color: #64ffda;
+        }
+
+        .patent-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #64ffda;
+            margin-bottom: 1rem;
+        }
+
+        .patent-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .patent-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .patent-tech-tag {
+            background: rgba(100, 255, 218, 0.1);
+            color: #64ffda;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
         .skills {
             padding: 100px 0;
             background: rgba(26, 26, 46, 0.5);
@@ -494,6 +662,8 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
+                <li><a href="#awards">Awards</a></li>
+                <li><a href="#patents">Patents</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -614,6 +784,119 @@
                         Worked on immersive technology solutions combining data analytics and AI. 
                         Contributed to various projects involving augmented reality, virtual reality, and AI-powered applications 
                         for enterprise clients across different industries.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards" class="awards">
+        <div class="container">
+            <h2 class="section-title">Awards & Recognition</h2>
+            <div class="awards-grid">
+                <div class="award-card">
+                    <div class="award-year">2024</div>
+                    <span class="award-icon">🌟</span>
+                    <h3 class="award-title">Star Performer at Verizon GenAI CoE</h3>
+                    <p class="award-description">
+                        Recognized as a Star Performer for exceptional contributions to the GenAI Center of Excellence, 
+                        driving innovation and delivering outstanding results in AI/ML platform development and team leadership.
+                    </p>
+                </div>
+                
+                <div class="award-card">
+                    <div class="award-year">2024</div>
+                    <span class="award-icon">🏆</span>
+                    <h3 class="award-title">Best Innovative Project of the Year</h3>
+                    <p class="award-description">
+                        Awarded for leading the development of groundbreaking AI/ML solutions that transformed business operations 
+                        and delivered significant value across multiple business units at Verizon.
+                    </p>
+                </div>
+                
+                <div class="award-card">
+                    <div class="award-year">2024</div>
+                    <span class="award-icon">🚀</span>
+                    <h3 class="award-title">Innovative Project Showcase at Tech Day 2024</h3>
+                    <p class="award-description">
+                        Selected to showcase innovative AI/ML projects at Tech Day 2024, demonstrating cutting-edge solutions 
+                        in TestHub AI and iNSpire AI platforms that revolutionized development and testing workflows.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Patents Section -->
+    <section id="patents" class="patents">
+        <div class="container">
+            <h2 class="section-title">Patents & Intellectual Property</h2>
+            <div class="patents-grid">
+                <div class="patent-card">
+                    <div class="patent-status granted">Granted</div>
+                    <span class="patent-icon">🔬</span>
+                    <h3 class="patent-title">Agentic AI - USPTO Patent</h3>
+                    <p class="patent-description">
+                        Revolutionary multi-agent AI system architecture that enables autonomous decision-making and 
+                        task execution across distributed environments. This patent covers novel approaches to 
+                        agent coordination, communication protocols, and adaptive learning mechanisms.
+                    </p>
+                    <div class="patent-tech">
+                        <span class="patent-tech-tag">Agentic AI</span>
+                        <span class="patent-tech-tag">Multi-Agent Systems</span>
+                        <span class="patent-tech-tag">Autonomous Systems</span>
+                    </div>
+                </div>
+                
+                <div class="patent-card">
+                    <div class="patent-status pending">Pending</div>
+                    <span class="patent-icon">🥽</span>
+                    <h3 class="patent-title">AR-Enhanced AI Insight Engine</h3>
+                    <p class="patent-description">
+                        Innovative augmented reality system that leverages computer vision and AI to provide 
+                        real-time insights and contextual information overlay. Combines YOLO object detection 
+                        with advanced scene understanding for industrial and consumer applications.
+                    </p>
+                    <div class="patent-tech">
+                        <span class="patent-tech-tag">Augmented Reality</span>
+                        <span class="patent-tech-tag">Computer Vision</span>
+                        <span class="patent-tech-tag">YOLO</span>
+                        <span class="patent-tech-tag">Scene Understanding</span>
+                    </div>
+                </div>
+                
+                <div class="patent-card">
+                    <div class="patent-status pending">Pending</div>
+                    <span class="patent-icon">🤖</span>
+                    <h3 class="patent-title">Adaptive ML Model Optimization</h3>
+                    <p class="patent-description">
+                        Advanced machine learning optimization framework that automatically adapts model 
+                        architecture and hyperparameters based on real-time performance metrics and 
+                        deployment constraints, ensuring optimal performance across diverse environments.
+                    </p>
+                    <div class="patent-tech">
+                        <span class="patent-tech-tag">Machine Learning</span>
+                        <span class="patent-tech-tag">Model Optimization</span>
+                        <span class="patent-tech-tag">AutoML</span>
+                        <span class="patent-tech-tag">Adaptive Systems</span>
+                    </div>
+                </div>
+                
+                <div class="patent-card">
+                    <div class="patent-status pending">Pending</div>
+                    <span class="patent-icon">🧠</span>
+                    <h3 class="patent-title">Intelligent Test Automation Framework</h3>
+                    <p class="patent-description">
+                        Comprehensive AI-driven testing framework that automatically generates, executes, 
+                        and optimizes test cases using natural language processing and machine learning. 
+                        Revolutionizes software testing lifecycle with intelligent automation capabilities.
+                    </p>
+                    <div class="patent-tech">
+                        <span class="patent-tech-tag">Test Automation</span>
+                        <span class="patent-tech-tag">NLP</span>
+                        <span class="patent-tech-tag">AI Testing</span>
+                        <span class="patent-tech-tag">SDLC</span>
                     </div>
                 </div>
             </div>
@@ -772,7 +1055,7 @@
         }, observerOptions);
 
         // Observe elements for scroll animations
-        document.querySelectorAll('.timeline-item, .stat-card, .skill-category').forEach(el => {
+        document.querySelectorAll('.timeline-item, .stat-card, .skill-category, .award-card, .patent-card').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
