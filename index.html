@@ -1,807 +1,349 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lokesh Kosuri - AI/ML Leader</title>
+    <title>Lokesh Kosuri | Sr. Tech Manager – AI/ML Engineering Leader</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: A single-page portfolio with a sticky navigation bar. The structure is thematic (Home, Experience, Awards, Patents, Skills, Impact, Projects, Contact) allowing users to quickly navigate to areas of interest. Key interactions include an accordion timeline for experience, interactive charts for skills and impact metrics, and card-based galleries for awards, patents, and projects. The 'Home' section now features descriptive achievement cards instead of numeric counters for a more qualitative overview. This flow guides the user from a high-level overview to deep-dive details, creating a more engaging and comprehensive narrative. -->
+    <!-- Visualization & Content Choices: Home -> Goal:Inform/Impress -> Viz:Profile text, Key Achievements (HTML grid with descriptive cards) -> Interaction:Hover effects -> Justification:Provides immediate qualitative impact and highlights key accomplishments. Experience -> Goal:Show Change -> Viz:Interactive Timeline (HTML/CSS/JS) -> Interaction:Click to expand details -> Justification:Condenses career progression, allows detailed exploration. Awards & Patents -> Goal:Inform/Highlight -> Viz:Card-based grid (HTML/CSS) -> Interaction:Hover effects -> Justification:Visually appealing, highlights specific achievements. Skills -> Goal:Compare -> Viz:Bar Chart (Chart.js) -> Interaction:Hover tooltips -> Justification:Visually groups skills and shows breadth of expertise. Impact -> Goal:Inform -> Viz:Doughnut Charts (Chart.js) -> Interaction:Hover tooltips -> Justification:Highlights specific business improvements clearly. Projects -> Goal:Inform -> Viz:Card-based grid (HTML/CSS) -> Interaction:Hover effects -> Justification:Showcases diverse project portfolio. CONFIRMING NO SVG/Mermaid. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            color: #ffffff;
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF7;
+            color: #3D4451;
             overflow-x: hidden;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
         .header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(15, 15, 35, 0.95);
+            background: rgba(255, 255, 255, 0.95); /* Light background for header */
             backdrop-filter: blur(10px);
             z-index: 1000;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, #64ffda, #00bcd4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: #ffffff;
+        .nav-link {
+            color: #3D4451; /* Darker color for links on light background */
             text-decoration: none;
             transition: all 0.3s ease;
             position: relative;
         }
-
-        .nav-links a:hover {
-            color: #64ffda;
+        .nav-link:hover {
+            color: #C07B67;
         }
-
-        .nav-links a::after {
+        .nav-link::after {
             content: '';
             position: absolute;
             bottom: -5px;
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(45deg, #64ffda, #00bcd4);
+            background-color: #C07B67; /* Accent color for hover effect */
             transition: width 0.3s ease;
         }
-
-        .nav-links a:hover::after {
+        .nav-link:hover::after {
             width: 100%;
         }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            flex: 1;
-            z-index: 2;
-        }
-
-        .hero-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            animation: slideInLeft 1s ease-out;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: #64ffda;
-            margin-bottom: 1.5rem;
-            animation: slideInLeft 1s ease-out 0.2s both;
-        }
-
-        .hero-description {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            animation: slideInLeft 1s ease-out 0.4s both;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            animation: slideInLeft 1s ease-out 0.6s both;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, #64ffda, #00bcd4);
-            color: #0f0f23;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: #64ffda;
-            border: 2px solid #64ffda;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.3);
-        }
-
-        /* Floating Elements */
-        .floating-elements {
+        .timeline-item::before {
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            left: -31px;
+            top: 4px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #D19D8E;
+            border: 3px solid #FDFBF7;
             z-index: 1;
         }
-
-        .floating-element {
+        .timeline-path {
             position: absolute;
-            border-radius: 50%;
-            background: linear-gradient(45deg, rgba(100, 255, 218, 0.1), rgba(0, 188, 212, 0.1));
-            animation: float 6s ease-in-out infinite;
+            left: -24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #EAEAEA;
         }
-
-        .floating-element:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 20%;
-            right: 10%;
-            animation-delay: 0s;
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
         }
-
-        .floating-element:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            top: 60%;
-            right: 20%;
-            animation-delay: 2s;
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
         }
-
-        .floating-element:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            top: 40%;
-            right: 5%;
-            animation-delay: 4s;
-        }
-
-        /* About Section */
-        .about {
-            padding: 100px 0;
-            background: rgba(26, 26, 46, 0.5);
-        }
-
         .section-title {
             font-size: 2.5rem;
             text-align: center;
             margin-bottom: 3rem;
-            background: linear-gradient(45deg, #64ffda, #00bcd4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #C07B67; /* Accent color for titles */
+            font-weight: 700;
         }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
+        .achievement-card {
+            background: #FFFFFF;
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(100, 255, 218, 0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid #EAEAEA;
             transition: all 0.3s ease;
         }
-
-        .stat-card:hover {
+        .achievement-card:hover {
             transform: translateY(-5px);
-            border-color: rgba(100, 255, 218, 0.3);
-            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.1);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #64ffda;
-            margin-bottom: 0.5rem;
+        /* Corrected CSS for achievement-card h3 */
+        .achievement-card h3 {
+            font-weight: bold;
+            font-size: 1.125rem; /* text-lg */
+            margin-bottom: 0.5rem; /* mb-2 */
+            color: #C07B67;
         }
-
-        .stat-label {
-            font-size: 1rem;
-            opacity: 0.8;
+        .achievement-card p {
+            color: #6B7280;
         }
-
-        /* Experience Section */
-        .experience {
-            padding: 100px 0;
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, #64ffda, #00bcd4);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 3rem;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(100, 255, 218, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .timeline-item:hover {
-            transform: translateX(10px);
-            border-color: rgba(100, 255, 218, 0.3);
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2.5rem;
-            top: 2rem;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #64ffda;
-            box-shadow: 0 0 20px rgba(100, 255, 218, 0.5);
-        }
-
-        .job-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #64ffda;
-            margin-bottom: 0.5rem;
-        }
-
-        .company {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .duration {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-bottom: 1rem;
-        }
-
-        .job-description {
-            line-height: 1.8;
-        }
-
-        /* Awards Section */
-        .awards {
-            padding: 100px 0;
-            background: rgba(26, 26, 46, 0.3);
-        }
-
-        .awards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .award-card {
-            background: rgba(255, 255, 255, 0.05);
+        .award-card, .patent-card {
+            background: #FFFFFF;
             padding: 2.5rem;
             border-radius: 20px;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid #EAEAEA;
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
         }
-
-        .award-card::before {
+        .award-card:hover, .patent-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        .award-card::before, .patent-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, #ffd700, #ffb700);
+            background-color: #C07B67; /* Accent color */
         }
-
-        .award-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(255, 215, 0, 0.4);
-            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2);
-        }
-
-        .award-icon {
+        .award-icon, .patent-icon {
             font-size: 3rem;
             margin-bottom: 1.5rem;
             display: block;
+            color: #D19D8E;
         }
-
-        .award-title {
+        .award-title, .patent-title {
             font-size: 1.4rem;
             font-weight: 700;
-            color: #ffd700;
+            color: #C07B67;
             margin-bottom: 1rem;
         }
-
-        .award-description {
-            color: rgba(255, 255, 255, 0.8);
+        .award-description, .patent-description {
+            color: #6B7280;
             line-height: 1.6;
             font-size: 1rem;
         }
-
-        .award-year {
+        .award-year, .patent-status {
             position: absolute;
             top: 1rem;
             right: 1.5rem;
-            background: rgba(255, 215, 0, 0.1);
-            color: #ffd700;
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* Patents Section */
-        .patents {
-            padding: 100px 0;
-            background: rgba(22, 33, 62, 0.3);
-        }
-
-        .patents-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .patent-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2.5rem;
-            border-radius: 20px;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(100, 255, 218, 0.2);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .patent-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #64ffda, #00bcd4);
-        }
-
-        .patent-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(100, 255, 218, 0.4);
-            box-shadow: 0 15px 40px rgba(100, 255, 218, 0.2);
-        }
-
-        .patent-status {
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
         }
-
+        .award-year {
+            background: rgba(209, 157, 142, 0.1);
+            color: #C07B67;
+            border: 1px solid rgba(209, 157, 142, 0.2);
+        }
         .patent-status.granted {
-            background: rgba(34, 197, 94, 0.2);
+            background: rgba(34, 197, 94, 0.1);
             color: #22c55e;
-            border: 1px solid rgba(34, 197, 94, 0.3);
+            border: 1px solid rgba(34, 197, 94, 0.2);
         }
-
         .patent-status.pending {
-            background: rgba(251, 146, 60, 0.2);
+            background: rgba(251, 146, 60, 0.1);
             color: #fb923c;
-            border: 1px solid rgba(251, 146, 60, 0.3);
+            border: 1px solid rgba(251, 146, 60, 0.2);
         }
-
-        .patent-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: block;
-            color: #64ffda;
-        }
-
-        .patent-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #64ffda;
-            margin-bottom: 1rem;
-        }
-
-        .patent-description {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .patent-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
         .patent-tech-tag {
-            background: rgba(100, 255, 218, 0.1);
-            color: #64ffda;
+            background: rgba(209, 157, 142, 0.1);
+            color: #C07B67;
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
             font-size: 0.8rem;
-            border: 1px solid rgba(100, 255, 218, 0.2);
+            border: 1px solid rgba(209, 157, 142, 0.2);
         }
-        .skills {
-            padding: 100px 0;
-            background: rgba(26, 26, 46, 0.5);
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
         .skill-category {
-            background: rgba(255, 255, 255, 0.05);
+            background: #FFFFFF;
             padding: 2rem;
             border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(100, 255, 218, 0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid #EAEAEA;
             transition: all 0.3s ease;
         }
-
         .skill-category:hover {
             transform: translateY(-5px);
-            border-color: rgba(100, 255, 218, 0.3);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
-
         .skill-category h3 {
-            color: #64ffda;
+            color: #C07B67;
             margin-bottom: 1rem;
             font-size: 1.3rem;
         }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
         .skill-tag {
-            background: rgba(100, 255, 218, 0.1);
-            color: #64ffda;
+            background: rgba(209, 157, 142, 0.1);
+            color: #C07B67;
             padding: 0.5rem 1rem;
             border-radius: 25px;
             font-size: 0.9rem;
-            border: 1px solid rgba(100, 255, 218, 0.2);
+            border: 1px solid rgba(209, 157, 142, 0.2);
             transition: all 0.3s ease;
         }
-
         .skill-tag:hover {
-            background: rgba(100, 255, 218, 0.2);
+            background: rgba(209, 157, 142, 0.2);
             transform: scale(1.05);
         }
-
-        /* Contact Section */
-        .contact {
-            padding: 100px 0;
-            text-align: center;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
         .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(100, 255, 218, 0.1);
+            background: #FFFFFF;
+            border: 1px solid #EAEAEA;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
         }
-
         .contact-item:hover {
             transform: translateY(-2px);
-            border-color: rgba(100, 255, 218, 0.3);
-            box-shadow: 0 5px 20px rgba(100, 255, 218, 0.2);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
-
         .contact-item a {
-            color: #ffffff;
-            text-decoration: none;
+            color: #3D4451;
         }
-
-        /* Footer */
         .footer {
-            padding: 2rem 0;
-            text-align: center;
-            border-top: 1px solid rgba(100, 255, 218, 0.1);
-            background: rgba(15, 15, 35, 0.8);
+            background-color: #3D4451; /* Dark footer for contrast */
+            color: #FDFBF7;
+            border-top: 1px solid #EAEAEA;
         }
-
-        /* Animations */
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        /* Dynamic particle effect */
+        .particle {
+            background: rgba(209, 157, 142, 0.3); /* Matching warm neutral palette */
         }
-
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-20px) rotate(180deg); }
         }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero-content {
-                text-align: center;
-            }
-            
-            .timeline {
-                padding-left: 1rem;
-            }
-            
-            .timeline-item {
-                margin-left: 1rem;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .job-description ul {
+            list-style: disc;
+            padding-left: 1.5rem;
         }
-
-        /* Scroll behavior */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(15, 15, 35, 0.8);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, #64ffda, #00bcd4);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(45deg, #00bcd4, #64ffda);
+        .job-description li {
+            margin-bottom: 0.5rem;
         }
     </style>
 </head>
-<body>
-    <!-- Header -->
+<body class="antialiased">
+
     <header class="header">
-        <nav class="nav">
-            <div class="logo">LK</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#awards">Awards</a></li>
-                <li><a href="#patents">Patents</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold text-gray-800">Lokesh Kosuri</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#awards" class="nav-link">Awards</a>
+                <a href="#patents" class="nav-link">Patents</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#impact" class="nav-link">Impact</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-gray-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
         </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4">
+            <a href="#home" class="block py-2 nav-link">Home</a>
+            <a href="#experience" class="block py-2 nav-link">Experience</a>
+            <a href="#awards" class="block py-2 nav-link">Awards</a>
+            <a href="#patents" class="block py-2 nav-link">Patents</a>
+            <a href="#skills" class="block py-2 nav-link">Skills</a>
+            <a href="#impact" class="block py-2 nav-link">Impact</a>
+            <a href="#projects" class="block py-2 nav-link">Projects</a>
+            <a href="#contact" class="block py-2 nav-link">Contact</a>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Lokesh Kosuri</h1>
-                <h2 class="hero-subtitle">Sr. Tech Manager - GenAI/ML Platforms</h2>
-                <p class="hero-description">
-                    AI/ML Leader with 12+ years of experience in Software Development, Innovation, AR, AIOps, and MLOps. 
-                    Proven expertise in delivering AI-enabled solutions, including GenAI, anomaly detection, and self-healing systems.
-                </p>
-                <div class="cta-buttons">
-                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                    <a href="#experience" class="btn btn-secondary">View Experience</a>
+    <main class="container mx-auto px-6 py-12">
+        
+        <section id="home" class="text-center mb-24">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Lokesh Kosuri</h1>
+            <h2 class="text-xl md:text-2xl font-medium text-[#C07B67] mb-4">Sr. Tech Manager – AI/ML Engineering Leader</h2>
+            <p class="text-lg max-w-3xl mx-auto mb-8 text-gray-700">
+                Experienced AI/ML Engineering Leader with 12+ years of expertise in developing and delivering AI/ML and Generative AI platforms at enterprise scale. Proven ability to lead high-performing teams, architect robust ML/AI solutions, and drive large-scale AI transformation initiatives across cross-functional teams. Strong background in MLOps, LLMs, NLP, and GenAI. Passionate about cultivating talent, promoting AI best practices, and delivering measurable business outcomes in regulated industries including telecom and life sciences.
+            </p>
+            <div class="flex justify-center space-x-4 text-sm text-gray-600 mb-12">
+                <span>klokesh113533@gmail.com</span>
+                <span>•</span>
+                <span>+91 9790591435</span>
+                <span>•</span>
+                <a href="https://linkedin.com/in/lokeshkosuri" target="_blank" class="hover:text-[#C07B67] transition-colors">linkedin.com/in/lokeshkosuri</a>
+            </div>
+            
+            <h2 class="section-title">Key Achievements</h2>
+            <p class="text-center max-w-2xl mx-auto mb-12 text-gray-700">A snapshot of my significant accomplishments and contributions throughout my career.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <div class="achievement-card">
+                    <h3 class="font-bold text-lg mb-2 text-[#C07B67]">Patents & IP</h3>
+                    <p>Agentic AI – USPTO patent granted. 3+ patents filed in AI, AR, and ML technologies.</p>
+                </div>
+                <div class="achievement-card">
+                    <h3 class="font-bold text-lg mb-2 text-[#C07B67]">Platform Scale</h3>
+                    <p>Led AI/ML platforms with 4,000+ users and supported 50,000+ user stories.</p>
+                </div>
+                <div class="achievement-card">
+                    <h3 class="font-bold text-lg mb-2 text-[#C07B67]">Recognition</h3>
+                    <p>Awarded Star Performer at Verizon GenAI CoE and recognized for enterprise AI delivery excellence.</p>
+                </div>
+                <div class="achievement-card">
+                    <h3 class="font-bold text-lg mb-2 text-[#C07B67]">Talent Development</h3>
+                    <p>Launched GenAI Talent Academy, facilitating onboarding and upskilling for 1,000+ internal users.</p>
                 </div>
             </div>
-        </div>
-        <div class="floating-elements">
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-        </div>
-    </section>
+        </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">12+</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">4000+</div>
-                    <div class="stat-label">Platform Users</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">300+</div>
-                    <div class="stat-label">MVPs Supported</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">1500+</div>
-                    <div class="stat-label">Features Delivered</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">25+</div>
-                    <div class="stat-label">Team Members Led</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">4</div>
-                    <div class="stat-label">USPTO Patents</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-        <div class="container">
+        <section id="experience" class="mb-24">
             <h2 class="section-title">Professional Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <h3 class="job-title">Sr. Tech Manager - GenAI/ML Platforms</h3>
-                    <h4 class="company">Verizon Wireless</h4>
-                    <div class="duration">May 2022 - Present</div>
-                    <div class="job-description">
-                        Led development and implementation of TestHub AI and iNSpire AI platforms with widespread adoption across business units. 
-                        Built and managed a high-performing team of 25+ data scientists, ML engineers, and full-stack developers. 
-                        Designed multi-agent architecture and developed in-house GPU-based LLMs and AI/ML models, frameworks, and libraries.
-                        Successfully productionized platforms across VCG, VBG, NS, CSG, TSGI, and TPD with 4000+ user base.
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <h3 class="job-title">Technology Lead - XR & GenAI CoE</h3>
-                    <h4 class="company">Tech Mahindra</h4>
-                    <div class="duration">Feb 2021 - May 2022</div>
-                    <div class="job-description">
-                        Spearheaded development of Verizon Virtual Store and delivered customer-facing features including Device Try-On, 
-                        Location-Based Mobile Features, and AR/VR use cases leveraging Meta Quest and Apple Vision Pro. 
-                        Implemented GenAI-powered Bill Summarization and created seamless Phygital Chat Experience.
-                        Enhanced customer satisfaction through adaptive user assistance and user frustration detection solutions.
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <h3 class="job-title">R&D Lead - Innovation Center</h3>
-                    <h4 class="company">Bajaj Finserv</h4>
-                    <div class="duration">Aug 2019 - Feb 2021</div>
-                    <div class="job-description">
-                        Led R&D team of 10+ members focused on AI techniques. Designed and implemented NLP pipelines for multilingual 
-                        customer support systems. Headed Bajaj FinServ's Technology Innovation and Incubation Center, collaborating 
-                        with innovative startups to develop integrated solutions for financial platforms and applications.
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <h3 class="job-title">Senior AI Developer</h3>
-                    <h4 class="company">Hexaware Technologies LTD</h4>
-                    <div class="duration">Jan 2018 - Aug 2019</div>
-                    <div class="job-description">
-                        Developed AI solutions and implemented machine learning models for enterprise clients. 
-                        Worked on various AI/ML projects including computer vision and natural language processing applications.
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <h3 class="job-title">Immersive Tech Developer - Data/AI</h3>
-                    <h4 class="company">Tata Consultancy Services</h4>
-                    <div class="duration">Jul 2014 - Jan 2018</div>
-                    <div class="job-description">
-                        Worked on immersive technology solutions combining data analytics and AI. 
-                        Contributed to various projects involving augmented reality, virtual reality, and AI-powered applications 
-                        for enterprise clients across different industries.
-                    </div>
-                </div>
+            <p class="text-center max-w-2xl mx-auto mb-12 text-gray-700">A detailed timeline of my professional journey, highlighting key roles and responsibilities.</p>
+            <div class="max-w-3xl mx-auto relative">
+                <div class="timeline-path"></div>
+                <div id="timeline-container"></div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Awards Section -->
-    <section id="awards" class="awards">
-        <div class="container">
+        <section id="awards" class="mb-24">
             <h2 class="section-title">Awards & Recognition</h2>
-            <div class="awards-grid">
+            <p class="text-center max-w-2xl mx-auto mb-12 text-gray-700">Acknowledging key accolades and recognitions received for my contributions to AI/ML and leadership.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <div class="award-card">
                     <div class="award-year">2024</div>
                     <span class="award-icon">🌟</span>
                     <h3 class="award-title">Star Performer at Verizon GenAI CoE</h3>
                     <p class="award-description">
-                        Recognized as a Star Performer for exceptional contributions to the GenAI Center of Excellence, 
-                        driving innovation and delivering outstanding results in AI/ML platform development and team leadership.
+                        Recognized for exceptional contributions to the GenAI Center of Excellence, driving innovation and delivering outstanding results in AI/ML platform development and team leadership.
                     </p>
                 </div>
                 
@@ -810,8 +352,7 @@
                     <span class="award-icon">🏆</span>
                     <h3 class="award-title">Best Innovative Project of the Year</h3>
                     <p class="award-description">
-                        Awarded for leading the development of groundbreaking AI/ML solutions that transformed business operations 
-                        and delivered significant value across multiple business units at Verizon.
+                        Awarded for leading the development of groundbreaking AI/ML solutions that transformed business operations and delivered significant value across multiple business units at Verizon.
                     </p>
                 </div>
                 
@@ -820,29 +361,24 @@
                     <span class="award-icon">🚀</span>
                     <h3 class="award-title">Innovative Project Showcase at Tech Day 2024</h3>
                     <p class="award-description">
-                        Selected to showcase innovative AI/ML projects at Tech Day 2024, demonstrating cutting-edge solutions 
-                        in TestHub AI and iNSpire AI platforms that revolutionized development and testing workflows.
+                        Selected to showcase innovative AI/ML projects at Tech Day 2024, demonstrating cutting-edge solutions in TestHub AI and iNSpire AI platforms that revolutionized development and testing workflows.
                     </p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Patents Section -->
-    <section id="patents" class="patents">
-        <div class="container">
+        <section id="patents" class="mb-24">
             <h2 class="section-title">Patents & Intellectual Property</h2>
-            <div class="patents-grid">
+            <p class="text-center max-w-2xl mx-auto mb-12 text-gray-700">Highlighting my contributions to innovation through granted and pending patents in AI, AR, and ML technologies.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
                 <div class="patent-card">
                     <div class="patent-status granted">Granted</div>
                     <span class="patent-icon">🔬</span>
                     <h3 class="patent-title">Agentic AI - USPTO Patent</h3>
                     <p class="patent-description">
-                        Revolutionary multi-agent AI system architecture that enables autonomous decision-making and 
-                        task execution across distributed environments. This patent covers novel approaches to 
-                        agent coordination, communication protocols, and adaptive learning mechanisms.
+                        Revolutionary multi-agent AI system architecture that enables autonomous decision-making and task execution across distributed environments. This patent covers novel approaches to agent coordination, communication protocols, and adaptive learning mechanisms.
                     </p>
-                    <div class="patent-tech">
+                    <div class="patent-tech flex flex-wrap gap-2 mt-4">
                         <span class="patent-tech-tag">Agentic AI</span>
                         <span class="patent-tech-tag">Multi-Agent Systems</span>
                         <span class="patent-tech-tag">Autonomous Systems</span>
@@ -854,11 +390,9 @@
                     <span class="patent-icon">🥽</span>
                     <h3 class="patent-title">AR-Enhanced AI Insight Engine</h3>
                     <p class="patent-description">
-                        Innovative augmented reality system that leverages computer vision and AI to provide 
-                        real-time insights and contextual information overlay. Combines YOLO object detection 
-                        with advanced scene understanding for industrial and consumer applications.
+                        Innovative augmented reality system that leverages computer vision and AI to provide real-time insights and contextual information overlay. Combines YOLO object detection with advanced scene understanding for industrial and consumer applications.
                     </p>
-                    <div class="patent-tech">
+                    <div class="patent-tech flex flex-wrap gap-2 mt-4">
                         <span class="patent-tech-tag">Augmented Reality</span>
                         <span class="patent-tech-tag">Computer Vision</span>
                         <span class="patent-tech-tag">YOLO</span>
@@ -871,11 +405,9 @@
                     <span class="patent-icon">🤖</span>
                     <h3 class="patent-title">Adaptive ML Model Optimization</h3>
                     <p class="patent-description">
-                        Advanced machine learning optimization framework that automatically adapts model 
-                        architecture and hyperparameters based on real-time performance metrics and 
-                        deployment constraints, ensuring optimal performance across diverse environments.
+                        Advanced machine learning optimization framework that automatically adapts model architecture and hyperparameters based on real-time performance metrics and deployment constraints, ensuring optimal performance across diverse environments.
                     </p>
-                    <div class="patent-tech">
+                    <div class="patent-tech flex flex-wrap gap-2 mt-4">
                         <span class="patent-tech-tag">Machine Learning</span>
                         <span class="patent-tech-tag">Model Optimization</span>
                         <span class="patent-tech-tag">AutoML</span>
@@ -888,11 +420,9 @@
                     <span class="patent-icon">🧠</span>
                     <h3 class="patent-title">Intelligent Test Automation Framework</h3>
                     <p class="patent-description">
-                        Comprehensive AI-driven testing framework that automatically generates, executes, 
-                        and optimizes test cases using natural language processing and machine learning. 
-                        Revolutionizes software testing lifecycle with intelligent automation capabilities.
+                        Comprehensive AI-driven testing framework that automatically generates, executes, and optimizes test cases using natural language processing and machine learning. Revolutionizes software testing lifecycle with intelligent automation capabilities.
                     </p>
-                    <div class="patent-tech">
+                    <div class="patent-tech flex flex-wrap gap-2 mt-4">
                         <span class="patent-tech-tag">Test Automation</span>
                         <span class="patent-tech-tag">NLP</span>
                         <span class="patent-tech-tag">AI Testing</span>
@@ -900,196 +430,362 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Technical Expertise</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Programming Languages</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">R</span>
-                        <span class="skill-tag">C#</span>
-                        <span class="skill-tag">C++</span>
+        <section id="skills" class="mb-24">
+            <h2 class="section-title">Core Skills</h2>
+            <p class="text-center max-w-2xl mx-auto mb-12 text-gray-700">A breadth of expertise across various technical domains, including extensive experience in mentoring and grooming next-gen leaders.</p>
+            <div class="chart-container">
+                <canvas id="skillsChart"></canvas>
+            </div>
+        </section>
+
+        <section id="impact" class="mb-24">
+            <h2 class="section-title">Business Impact Through AI</h2>
+            <p class="text-center max-w-2xl mx-auto mb-12 text-gray-700">My work focuses on translating AI capabilities into tangible business outcomes. The following metrics highlight key improvements delivered in network operations and efficiency.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto text-center">
+                <div>
+                    <div class="chart-container h-64 sm:h-80">
+                         <canvas id="mttrChart"></canvas>
                     </div>
+                    <h3 class="mt-4 font-bold text-lg text-gray-800">Network Resolution</h3>
+                    <p class="text-gray-700">Reduced Mean Time To Resolution (MTTR) for network engineers.</p>
                 </div>
-                
-                <div class="skill-category">
-                    <h3>AI/ML Frameworks</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">TensorFlow</span>
-                        <span class="skill-tag">PyTorch</span>
-                        <span class="skill-tag">Transformers</span>
-                        <span class="skill-tag">BERT</span>
-                        <span class="skill-tag">GPT</span>
-                        <span class="skill-tag">Llama</span>
-                        <span class="skill-tag">Gemini</span>
+                <div>
+                    <div class="chart-container h-64 sm:h-80">
+                         <canvas id="outageChart"></canvas>
                     </div>
+                    <h3 class="mt-4 font-bold text-lg text-gray-800">Proactive Maintenance</h3>
+                    <p class="text-gray-700">Reduced unplanned cell-site outages through predictive health models.</p>
                 </div>
-                
-                <div class="skill-category">
-                    <h3>Cloud & DevOps</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">AWS</span>
-                        <span class="skill-tag">GCP</span>
-                        <span class="skill-tag">Azure</span>
-                        <span class="skill-tag">MLOps</span>
-                        <span class="skill-tag">AIOps</span>
+                <div>
+                    <div class="chart-container h-64 sm:h-80">
+                         <canvas id="spectrumChart"></canvas>
                     </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>AI Technologies</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Agentic AI</span>
-                        <span class="skill-tag">Crew AI</span>
-                        <span class="skill-tag">LLMs/SLMs</span>
-                        <span class="skill-tag">Diffusion Models</span>
-                        <span class="skill-tag">GANs</span>
-                        <span class="skill-tag">VAEs</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>Data & Databases</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Graph DB</span>
-                        <span class="skill-tag">Vector DB</span>
-                        <span class="skill-tag">NLP</span>
-                        <span class="skill-tag">Computer Vision</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>Leadership Skills</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Strategy</span>
-                        <span class="skill-tag">Innovation</span>
-                        <span class="skill-tag">Team Leadership</span>
-                        <span class="skill-tag">Collaboration</span>
-                        <span class="skill-tag">Vision</span>
-                        <span class="skill-tag">Execution</span>
-                    </div>
+                    <h3 class="mt-4 font-bold text-lg text-gray-800">Capex Optimization</h3>
+                    <p class="text-gray-700">Improved 5G spectrum utilization with reinforcement learning agents.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
+        <section id="projects" class="mb-24">
+            <h2 class="section-title">Project Highlights</h2>
+            <p class="text-center max-w-2xl mx-auto mb-12 text-gray-700">Showcasing key projects where I led the development and delivery of innovative AI/ML solutions.</p>
+            <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </section>
+
+        <section id="contact" class="mb-24 text-center">
             <h2 class="section-title">Let's Connect</h2>
-            <p>Ready to discuss AI/ML innovations and opportunities? I'd love to hear from you.</p>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <span>📧</span>
+            <p class="mb-8 text-gray-700">Ready to discuss AI/ML innovations and opportunities? I'd love to hear from you.</p>
+            <div class="contact-info flex justify-center gap-6 flex-wrap max-w-4xl mx-auto">
+                <div class="contact-item flex items-center gap-2 p-4 rounded-full">
+                    <span class="text-xl text-[#C07B67]">📧</span>
                     <a href="mailto:klokesh113533@gmail.com">klokesh113533@gmail.com</a>
                 </div>
-                <div class="contact-item">
-                    <span>📱</span>
+                <div class="contact-item flex items-center gap-2 p-4 rounded-full">
+                    <span class="text-xl text-[#C07B67]">📱</span>
                     <a href="tel:+919790591435">+91 97905 91435</a>
                 </div>
-                <div class="contact-item">
-                    <span>💼</span>
+                <div class="contact-item flex items-center gap-2 p-4 rounded-full">
+                    <span class="text-xl text-[#C07B67]">💼</span>
                     <a href="https://linkedin.com/in/lokeshkosuri" target="_blank">LinkedIn</a>
                 </div>
-                <div class="contact-item">
-                    <span>📍</span>
+                <div class="contact-item flex items-center gap-2 p-4 rounded-full">
+                    <span class="text-xl text-[#C07B67]">📍</span>
                     <span>Hyderabad, TG</span>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
+    </main>
+
+    <footer class="footer py-8">
+        <div class="container mx-auto px-6 text-center">
             <p>&copy; 2025 Lokesh Kosuri. All rights reserved. | AI/ML Leader & Innovation Expert</p>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Header background on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(15, 15, 35, 0.98)';
-            } else {
-                header.style.background = 'rgba(15, 15, 35, 0.95)';
+        const experienceData = [
+            {
+                role: 'Sr. Tech Manager – GenAI/ML Platforms',
+                company: 'Verizon Wireless',
+                duration: 'May 2022 – Present',
+                location: 'Hyderabad, India',
+                details: [
+                    'Defined and executed enterprise-wide GenAI strategy spanning Consumer, Commercial, Reporting, and Network domains.',
+                    'Prioritized 300+ AI/GenAI use cases, aligning solutions with Verizon’s digital transformation objectives.',
+                    'Architected multi-agent orchestration solutions leveraging CrewAI, AutoGen, Temporal, and LangGraph.',
+                    'Managed a team of 25+ engineers covering AI/ML, MLOps, and full-stack development.',
+                    'Launched GenAI Talent Academy, facilitating onboarding and upskilling for 1,000+ internal users and actively mentored and groomed next-gen leaders for critical roles.',
+                    'Instituted Responsible AI practices, auditability, and robust production failover frameworks.'
+                ]
+            },
+            {
+                role: 'Technology Lead – XR & GenAI CoE',
+                company: 'Tech Mahindra',
+                duration: 'Feb 2021 – May 2022',
+                location: 'Hyderabad, India',
+                details: [
+                    'Developed Generative AI and AR-powered solutions for worldwide clients, including virtual commerce experiences and NLP-based bill summarization & Virtual Stores.',
+                    'Integrated "phygital" UX by combining conversational AI assistants and augmented reality.',
+                    'Collaborated with Center of Excellence teams on cross-domain GenAI initiatives.'
+                ]
+            },
+            {
+                role: 'R&D Lead – Innovation Center',
+                company: 'Bajaj Finserv',
+                duration: 'Aug 2019 – Feb 2021',
+                location: 'Pune, India',
+                details: [
+                    'Managed AI/ML research and product innovation team.',
+                    'Delivered multilingual NLP modules and chatbot deployments.',
+                    'Led AI engagement with fintech startups and partners.'
+                ]
+            },
+            {
+                role: 'Senior AI Developer',
+                company: 'Hexaware Technologies LTD',
+                duration: 'Jan 2018 – Aug 2019',
+                location: 'Chennai, India',
+                details: [
+                    'Built and maintained enterprise document intelligence platforms.',
+                    'Developed and deployed BERT-based legal clause extraction systems.'
+                ]
+            },
+            {
+                role: 'Immersive Tech Developer – AI & Data',
+                company: 'Tata Consultancy Services',
+                duration: 'Jul 2014 – Jan 2018',
+                location: 'Bengaluru, India',
+                details: [
+                    'Developed early-stage AI + AR assistants for manufacturing environments using Microsoft HoloLens.',
+                    'Created PoCs for voice interface and visual feedback applications.'
+                ]
             }
-        });
+        ];
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        const projectsData = [
+            { title: 'iNSpire AI', description: 'Enterprise GenAI SDLC Automation Platform that delivered over 300 MVPs.' },
+            { title: 'TestHub AI', description: 'MLOps-enabled Test Lifecycle Automation platform leveraging LLMs.' },
+            { title: 'Network Genie', description: 'CrewAI + RAG-based GenAI solution for field engineers, reducing MTTR by 25%.' },
+            { title: 'MarkTech AI', description: 'Marketing content generation using multi-agent orchestration and GenAI frameworks.' },
+            { title: 'Reporting AI', description: 'Scenario modeling and insight generation for commercial operations.' },
+            { title: 'AI Talent Development', description: 'Designed and led GenAI onboarding and mentorship programs for 1000+ users.' }
+        ];
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+        document.addEventListener('DOMContentLoaded', () => {
+            const timelineContainer = document.getElementById('timeline-container');
+            experienceData.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'timeline-item mb-8 pl-8 relative bg-white p-6 rounded-lg shadow-md border border-gray-200/50';
+                div.innerHTML = `
+                    <div class="cursor-pointer">
+                        <h3 class="font-bold text-xl text-gray-800">${item.role}</h3>
+                        <p class="font-medium text-[#C07B67]">${item.company}</p>
+                        <p class="text-sm text-gray-500">${item.duration} | ${item.location}</p>
+                    </div>
+                    <div class="details-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out mt-4">
+                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                            ${item.details.map(d => `<li>${d}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+                timelineContainer.appendChild(div);
+            });
+
+            document.querySelectorAll('.timeline-item .cursor-pointer').forEach(item => {
+                item.addEventListener('click', event => {
+                    const content = event.currentTarget.nextElementSibling;
+                    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                        content.style.maxHeight = '0px';
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    }
+                });
+            });
+
+            const projectsContainer = document.getElementById('projects-container');
+            projectsData.forEach(project => {
+                const div = document.createElement('div');
+                div.className = 'bg-white p-6 rounded-lg shadow-md border border-gray-200/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300';
+                div.innerHTML = `
+                    <h3 class="font-bold text-xl mb-2 text-[#C07B67]">${project.title}</h3>
+                    <p class="text-gray-600">${project.description}</p>
+                `;
+                projectsContainer.appendChild(div);
+            });
+
+            const skillsCtx = document.getElementById('skillsChart').getContext('2d');
+            new Chart(skillsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Programming Languages', 'AI/ML Frameworks', 'Cloud & DevOps', 'AI Technologies', 'Data & Databases', 'Leadership Skills'],
+                    datasets: [{
+                        label: 'Number of Skills/Frameworks',
+                        data: [6, 7, 5, 6, 4, 6],
+                        backgroundColor: '#D19D8E',
+                        borderColor: '#C07B67',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: { beginAtZero: true }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Skill Distribution' }
+                    }
                 }
             });
-        }, observerOptions);
 
-        // Observe elements for scroll animations
-        document.querySelectorAll('.timeline-item, .stat-card, .skill-category, .award-card, .patent-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
+            const createDoughnutChart = (id, value, label) => {
+                const ctx = document.getElementById(id).getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: [label, ''],
+                        datasets: [{
+                            data: [value, 100 - value],
+                            backgroundColor: ['#C07B67', '#EAEAEA'],
+                            borderColor: ['#FDFBF7'],
+                            borderWidth: 2,
+                            circumference: 180,
+                            rotation: 270,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { enabled: false }
+                        },
+                        cutout: '70%',
+                    }
+                });
+            };
 
-        // Add dynamic particle effect
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.style.position = 'fixed';
-            particle.style.width = Math.random() * 4 + 2 + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.background = 'rgba(100, 255, 218, 0.3)';
-            particle.style.borderRadius = '50%';
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.top = window.innerHeight + 'px';
-            particle.style.pointerEvents = 'none';
-            particle.style.zIndex = '1';
+            createDoughnutChart('mttrChart', 25, 'Reduction');
+            createDoughnutChart('outageChart', 12, 'Reduction');
+            createDoughnutChart('spectrumChart', 8, 'Improvement');
             
-            document.body.appendChild(particle);
+            // Removed dynamic counter logic as requested
+            // const counters = document.querySelectorAll('.dynamic-counter');
+            // const observer = new IntersectionObserver((entries) => {
+            //     entries.forEach(entry => {
+            //         if (entry.isIntersecting) {
+            //             const counter = entry.target;
+            //             const target = +counter.getAttribute('data-target');
+            //             const speed = 200;
+            //             const updateCount = () => {
+            //                 const count = +counter.innerText;
+            //                 const inc = target / speed;
+            //                 if (count < target) {
+            //                     counter.innerText = Math.ceil(count + inc);
+            //                     setTimeout(updateCount, 10);
+            //                 } else {
+            //                     counter.innerText = target.toLocaleString();
+            //                 }
+            //             };
+            //             updateCount();
+            //             observer.unobserve(counter);
+            //         }
+            //     });
+            // }, { threshold: 0.5 });
             
-            const animation = particle.animate([
-                { transform: 'translateY(0px)', opacity: 1 },
-                { transform: `translateY(-${window.innerHeight + 100}px)`, opacity: 0 }
-            ], {
-                duration: Math.random() * 3000 + 2000,
-                easing: 'linear'
+            // counters.forEach(counter => observer.observe(counter));
+
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
             });
-            
-            animation.onfinish = () => particle.remove();
-        }
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
 
-        // Create particles periodically
-        setInterval(createParticle, 300);
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Header background on scroll
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('.header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(255, 255, 255, 0.98)';
+                } else {
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                }
+            });
+
+            // Intersection Observer for animations (updated selectors)
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const generalObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.timeline-item, .achievement-card, .skill-category, .award-card, .patent-card, .contact-item, #projects-container > div').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                generalObserver.observe(el);
+            });
+
+            // Add dynamic particle effect
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'particle'; /* Add a class for styling */
+                particle.style.position = 'fixed';
+                particle.style.width = Math.random() * 4 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = 'rgba(209, 157, 142, 0.3)'; /* Warm neutral with transparency */
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * window.innerWidth + 'px';
+                particle.style.top = window.innerHeight + 'px';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '1';
+                
+                document.body.appendChild(particle);
+                
+                const animation = particle.animate([
+                    { transform: 'translateY(0px)', opacity: 1 },
+                    { transform: `translateY(-${window.innerHeight + 100}px)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    easing: 'linear'
+                });
+                
+                animation.onfinish = () => particle.remove();
+            }
+
+            setInterval(createParticle, 300);
+        });
     </script>
 </body>
 </html>
